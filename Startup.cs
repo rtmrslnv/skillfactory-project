@@ -31,6 +31,7 @@ namespace AwesomeNetwork
         }
 
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
 
