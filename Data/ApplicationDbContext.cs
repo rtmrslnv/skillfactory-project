@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using AwesomeNetwork.Models.Users;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System.Text;
+using AwesomeNetwork.Configs;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace AwesomeNetwork.Data
 {
@@ -13,7 +14,15 @@ namespace AwesomeNetwork.Data
             : base(options)
         {
 
-            Database.EnsureCreated();
+            Database.Migrate();
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+
+            base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new FriendConfiguration());
+            builder.ApplyConfiguration(new MessageConfuiguration());
         }
     }
 }

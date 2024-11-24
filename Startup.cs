@@ -31,7 +31,6 @@ namespace AwesomeNetwork
         }
 
         public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -50,11 +49,12 @@ namespace AwesomeNetwork
                 .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection))
                 .AddUnitOfWork()
                     .AddCustomRepository<Message, MessageRepository>()
+                    .AddCustomRepository<Friend, FriendsRepository>()
                 .AddIdentity<User, IdentityRole>(opts => {
-                    opts.Password.RequiredLength = 8;   
+                    opts.Password.RequiredLength = 5;   
                     opts.Password.RequireNonAlphanumeric = false;  
-                    opts.Password.RequireLowercase = true; 
-                    opts.Password.RequireUppercase = true; 
+                    opts.Password.RequireLowercase = false; 
+                    opts.Password.RequireUppercase = false; 
                     opts.Password.RequireDigit = false;
                 })
                     .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -73,12 +73,10 @@ namespace AwesomeNetwork
             }
             else
             {
-
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-
             var cachePeriod = "0";
             app.UseStaticFiles(new StaticFileOptions
             {
@@ -91,7 +89,7 @@ namespace AwesomeNetwork
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
+            app.useEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",

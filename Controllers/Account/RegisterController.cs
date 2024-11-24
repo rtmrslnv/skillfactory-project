@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using AwesomeNetwork.Models.Users;
-using AwesomeNetwork.ViewModels.Account;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using AwesomeNetwork.Data.Repository;
 using System.Threading.Tasks;
-using AwesomeNetwork.Data.UoW;
-
-using Microsoft.AspNetCore.Identity;
+using AutoMapper;
 using System.Linq;
+using AwesomeNetwork.Models.Users;
+using AwesomeNetwork.Data.Repository;
+using AwesomeNetwork.Data.UoW;
+using AwesomeNetwork.ViewModels.Account;
+using Microsoft.AspNetCore.Identity;
+
 namespace AwesomeNetwork.Controllers.Account
 {
     public class RegisterController : Controller
@@ -21,8 +21,8 @@ namespace AwesomeNetwork.Controllers.Account
         {
             _mapper = mapper;
 
-            _signInManager = signInManager;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
 
@@ -54,7 +54,6 @@ namespace AwesomeNetwork.Controllers.Account
                 var result = await _userManager.CreateAsync(user, model.PasswordReg);
                 if (result.Succeeded)
                 {
-
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }

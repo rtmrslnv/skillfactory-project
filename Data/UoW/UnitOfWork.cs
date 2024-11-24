@@ -32,7 +32,6 @@ namespace AwesomeNetwork.Data.UoW
                 var customRepo = _appContext.GetService<IRepository<TEntity>>();
                 if (customRepo != null)
                 {
-
                     return customRepo;
                 }
             }

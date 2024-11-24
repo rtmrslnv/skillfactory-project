@@ -16,7 +16,7 @@ namespace AwesomeNetwork.ViewModels.Account
         [DataType(DataType.Password)]
         [Display(Name = "Пароль", Prompt = "Введите пароль")]
         public string Password { get; set; }
-        [Display(Name = "Запомнить пароль?")]
+        [Display(Name = "Запомнить?")]
         public bool RememberMe { get; set; }
         public string ReturnUrl { get; set; }
     }
